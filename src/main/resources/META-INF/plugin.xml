@@ -1,0 +1,52 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+
+    <!-- Unique id for this plugin. Must stay constant for the life of the plugin. -->
+    <id>org.myasnikov.inspecton.arch</id>
+
+    <!-- Text to display as name on Preferences/Settings | Plugin page -->
+    <name>Architectural Inspection</name>
+
+    <!-- Product and plugin compatibility requirements -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+
+    <description>
+        <![CDATA[
+      Demonstrates architectural Local Inspection Tool.<br> Adds entries to
+      <b>Preferences | Editor | Inspections | Java | Probable Bugs</b>.
+    ]]>
+    </description>
+
+    <version>1.1</version>
+    <change-notes>
+        <![CDATA[
+      Adding new rule methods
+    ]]>
+    </change-notes>
+
+    <vendor email="denismyasnikov@bk.ru"/>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+
+        <localInspection language="JAVA"
+                         groupPath="Java"
+                         groupBundle="messages.InspectionsBundle"
+                         groupKey="group.names.probable.bugs"
+                         enabledByDefault="true"
+                         level="ERROR"
+                         implementationClass="ArchInspection"/>
+
+        <postStartupActivity
+                id="CASA"
+                implementation="ReadFilePostStartupActivity"/>
+
+    </extensions>
+
+    <actions>
+        <action id="UpdateArchRules" class="UpdateArchRules" text="UpdateRules" description="Reading rules from file">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl SLASH" second-keystroke="PERIOD"/>
+        </action>
+    </actions>
+</idea-plugin>
